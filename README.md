@@ -71,8 +71,8 @@ service iptables restart <br>
 #JAVA 调用
 Base64依赖库版本 <br> 
 
-<dependency> <br> 
-        <groupId>commons-codec</groupId> <br> 
+\<dependency\> <br> 
+        \<groupId\>commons-codec\<\/groupId\> <br> 
         <artifactId>commons-codec</artifactId> <br> 
         <version>1.9</version> <br> 
 </dependency> <br> 
