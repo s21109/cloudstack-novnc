@@ -1,16 +1,15 @@
 cloudstack-novnc
 ================
-CloudStack 的VNC除了浏览器兼容性能好一点，其他的体验都不是很好，利用retspen的webvirtmgr小改了一版。\<br> 
-https://github.com/retspen/webvirtmgr 
-\<br> 
-mkdir  -p /var/www;cd /var/www \<br> 
-wget https://github.com/s21109/cloudstack-novnc/archive/master.zip \<br> 
-unzip master.zip\<br> 
-cd cloudstack-novnc-master\<br> 
-rpm -ivh  http://mirrors.hustunique.com/epel/6/x86_64/epel-release-6-8.noarch.rpm\<br> 
-sudo yum -y install git python-pip libvirt-python libxml2-python python-websockify supervisor nginx -y\<br> 
-sudo python-pip install -r requirements.txt\<br> 
-touch  /etc/nginx/conf.d/webvirtmgr.conf\<br> 
+CloudStack 的VNC除了浏览器兼容性能好一点，其他的体验都不是很好，利用retspen的webvirtmgr小改了一版。<br> 
+https://github.com/retspen/webvirtmgr <br> 
+mkdir  -p /var/www;cd /var/www <br> 
+wget https://github.com/s21109/cloudstack-novnc/archive/master.zip <br> 
+unzip master.zip<br> 
+cd cloudstack-novnc-master<br> 
+rpm -ivh  http://mirrors.hustunique.com/epel/6/x86_64/epel-release-6-8.noarch.rpm<br> 
+sudo yum -y install git python-pip libvirt-python libxml2-python python-websockify supervisor nginx -y<br> 
+sudo python-pip install -r requirements.txt<br> 
+touch  /etc/nginx/conf.d/webvirtmgr.conf<br> 
 
 #添加内容
 
