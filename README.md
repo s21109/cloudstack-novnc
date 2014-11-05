@@ -19,7 +19,7 @@ server {
     server_name $hostname;
     #access_log /var/log/nginx/webvirtmgr_access_log;
     location /static/ {
-        root /var/www/xiangcloudvirtmgr/xiangcloud; # or /srv instead of /var
+        root /var/www/cloudstack-novnc-master/xiangcloud; # or /srv instead of /var
         expires max;
     }
 
@@ -38,14 +38,14 @@ server {
 </pre>
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak <br> 
 sudo  chkconfig nginx on <br> 
-sudo chown -R nginx:nginx /var/www/xiangcloudvirtmgr <br> 
+sudo chown -R nginx:nginx /var/www/cloudstack-novnc-master <br> 
 sudo service nginx restart <br> 
 vim /etc/supervisord.conf <br> 
 #Add these lines to end of file /etc/supervisord.conf <br> 
 <pre>
 [program:webvirtmgr]
-command=/usr/bin/python /var/www/xiangcloudvirtmgr/manage.py run_gunicorn -c /var/www/xiangcloudvirtmgr/conf/gunicorn.conf.py
-directory=/var/www/xiangcloudvirtmgr
+command=/usr/bin/python /var/www/cloudstack-novnc-master/manage.py run_gunicorn -c /var/www/cloudstack-novnc-master/conf/gunicorn.conf.py
+directory=/var/www/cloudstack-novnc-master
 autostart=true
 autorestart=true
 logfile=/var/log/supervisor/webvirtmgr.log
@@ -53,8 +53,8 @@ log_stderr=true
 user=nginx
 
 [program:webvirtmgri-novnc]
-command=/usr/bin/python /var/www/xiangcloudvirtmgr/console/webvirtmgr-novnc
-directory=/var/www/xiangcloudvirtmgr
+command=/usr/bin/python /var/www/cloudstack-novnc-master/console/webvirtmgr-novnc
+directory=/var/www/cloudstack-novnc-master
 autostart=true
 autorestart=true
 stdout_logfile=/var/log/supervisor/webvirtmgr-nonvc.log
