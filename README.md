@@ -13,7 +13,7 @@ touch  /etc/nginx/conf.d/webvirtmgr.conf<br>
 
 #添加内容
 vim   /etc/nginx/conf.d/webvirtmgr.conf <br> 
-
+<pre>
 server {
     listen 80 default_server;
     server_name $hostname;
@@ -35,7 +35,7 @@ server {
         client_max_body_size 1024M; # Set higher depending on your needs 
     }
 }
-
+</pre>
 mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak <br> 
 sudo  chkconfig nginx on <br> 
 sudo chown -R nginx:nginx /var/www/xiangcloudvirtmgr <br> 
