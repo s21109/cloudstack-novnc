@@ -12,61 +12,37 @@ sudo python-pip install -r requirements.txt<br>
 touch  /etc/nginx/conf.d/webvirtmgr.conf<br> 
 
 #添加内容
-
-vim   /etc/nginx/conf.d/webvirtmgr.conf
+vim   /etc/nginx/conf.d/webvirtmgr.conf <br> 
 
 server {
-
     listen 80 default_server;
-
     server_name $hostname;
-    
-    #access_log /var/log/nginx/webvirtmgr_access_log; 
-
+    #access_log /var/log/nginx/webvirtmgr_access_log;
     location /static/ {
-    
         root /var/www/xiangcloudvirtmgr/xiangcloud; # or /srv instead of /var
-        
         expires max;
-        
     }
 
     location / {
-    
         proxy_pass http://127.0.0.1:8000;
-        
         proxy_set_header X-Real-IP $remote_addr;
-        
         proxy_set_header X-Forwarded-for $proxy_add_x_forwarded_for;
-        
         proxy_set_header Host $host:$server_port;
-        
         proxy_set_header X-Forwarded-Proto $remote_addr;
-        
         proxy_connect_timeout 600;
-        
         proxy_read_timeout 600;
-        
         proxy_send_timeout 600;
-        
         client_max_body_size 1024M; # Set higher depending on your needs 
-        
     }
-    
 }
 
-mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak
-
-sudo  chkconfig nginx on
-
-sudo chown -R nginx:nginx /var/www/xiangcloudvirtmgr
-
-sudo service nginx restart
-
-vim /etc/supervisord.conf
-
-#Add these lines to end of file /etc/supervisord.conf
-
+mv /etc/nginx/conf.d/default.conf /etc/nginx/conf.d/default.conf.bak <br> 
+sudo  chkconfig nginx on <br> 
+sudo chown -R nginx:nginx /var/www/xiangcloudvirtmgr <br> 
+sudo service nginx restart <br> 
+vim /etc/supervisord.conf <br> 
+#Add these lines to end of file /etc/supervisord.conf <br> 
+<pre>
 [program:webvirtmgr]
 command=/usr/bin/python /var/www/xiangcloudvirtmgr/manage.py run_gunicorn -c /var/www/xiangcloudvirtmgr/conf/gunicorn.conf.py
 directory=/var/www/xiangcloudvirtmgr
@@ -84,31 +60,24 @@ autorestart=true
 stdout_logfile=/var/log/supervisor/webvirtmgr-nonvc.log
 redirect_stderr=true
 user=nginx
-
-sudo service supervisord restart
-
-chkconfig supervisord on
-
+</pre>
+sudo service supervisord restart <br> 
+chkconfig supervisord on <br> 
 #查看novnc服务是否启动
-
-netstat -anp|grep 6080
-
-/sbin/iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT
-
-iptables-save > /etc/sysconfig/iptables
-
-service iptables restart
-
+netstat -anp|grep 6080 <br> 
+/sbin/iptables -A INPUT -m state --state NEW -p tcp --dport 80 -j ACCEPT <br> 
+iptables-save > /etc/sysconfig/iptables <br> 
+service iptables restart <br> 
 #JAVA 调用
-
-Base64依赖库版本
-
+Base64依赖库版本 <br> 
+<pre>
 <dependency>
         <groupId>commons-codec</groupId>
         <artifactId>commons-codec</artifactId>
         <version>1.9</version>
 </dependency>
-
+</pre>
+<pre>
 @RequestMapping(method = RequestMethod.GET)
 public String openvnc(ServletRequest request) {
         String token = null;
@@ -123,10 +92,11 @@ public String openvnc(ServletRequest request) {
         }
         return  "redirect:http://192.168.30.57/console/?token="+token;
 }
-
+</pre>
 
 #Django 调用
-
+<pre>
 function open_vnc() {
     window.open('{% url 'console' %}?token={{token}}', '', 'width=850,height=485')
 }
+</pre>
