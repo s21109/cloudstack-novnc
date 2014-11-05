@@ -70,13 +70,13 @@ iptables-save > /etc/sysconfig/iptables <br>
 service iptables restart <br> 
 #JAVA 调用
 Base64依赖库版本 <br> 
-<pre>
-<dependency>
-        <groupId>commons-codec</groupId>
-        <artifactId>commons-codec</artifactId>
-        <version>1.9</version>
-</dependency>
-</pre>
+
+<dependency> <br> 
+        <groupId>commons-codec</groupId> <br> 
+        <artifactId>commons-codec</artifactId> <br> 
+        <version>1.9</version> <br> 
+</dependency> <br> 
+
 <pre>
 @RequestMapping(method = RequestMethod.GET)
 public String openvnc(ServletRequest request) {
