@@ -17,12 +17,9 @@ def console(request):
     VNC instance block
     """
     if request.method == 'GET':
-        reqtoken = request.GET.get("token")
-        reqstr = base64.decodestring(reqtoken)
-        temptoken = reqstr.split('|', 2)
-        hostname = temptoken[0]
-        name = temptoken[1]
-        display = temptoken[2]
+        hostname =  request.GET.get("host")
+        name = request.GET.get("instance")
+        display = name
         password = None
         login = None
         htype = 1
